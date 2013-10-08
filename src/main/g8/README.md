@@ -18,6 +18,16 @@ Then finally build it with:
 
 See `cabal build --help` for more build options.
 
+## Yesod Development
+
+To run the development server run
+
+    \$ yesod devel
+
+From the same directory as the `$name;format="camel"$.cabal` file
+
+See [**here**] [yesod-home] for more information on **Yesod**.
+
 ## Running Unit Tests
 
 **After** running `cabal build`, you can run the unit tests with the command:
@@ -31,4 +41,4 @@ see the **doctest** [**User Guide**] [doctest-userguide].
 
 [doctest-github]: https://github.com/sol/doctest-haskell "sol/doctest-haskell on GitHub.com"
 [doctest-userguide]: https://github.com/sol/doctest-haskell/blob/master/README.markdown#usage "doctest Usage Guide"
-
+[yesod-home]: http://www.yesodweb.com/ "Yesod Web Application Framework"
