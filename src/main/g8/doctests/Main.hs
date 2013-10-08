@@ -8,14 +8,31 @@ import System.Directory
 import System.FilePath
 import Test.DocTest
 
+extensions :: [String]
+extensions =
+    [   "TemplateHaskell"
+    ,   "QuasiQuotes"
+    ,   "OverloadedStrings"
+    ,   "NoImplicitPrelude"
+    ,   "CPP"
+    ,   "MultiParamTypeClasses"
+    ,   "TypeFamilies"
+    ,   "GADTs"
+    ,   "GeneralizedNewtypeDeriving"
+    ,   "FlexibleContexts"
+    ,   "EmptyDataDecls"
+    ,   "NoMonomorphismRestriction"
+    ,   "DeriveDataTypeable"
+    ]
+
 opts :: [FilePath]
-opts = 
+opts =
     [   "-isrc"
     ,   "-idist/build/autogen"
     ,   "-optP-include"
     ,   "-optPdist/build/autogen/cabal_macros.h"
     ,   "-hide-all-packages"
-    ] ++ (map ("-package=" ++) deps)
+    ] ++ map ("-package=" ++) deps ++ map ("-X" ++) extensions
 
 -- the list of all file paths to search for source files
 sourceDirs :: [FilePath]
@@ -30,7 +47,7 @@ getFilesAndDirectories dir = do
     (,) <\$> filterM doesDirectoryExist c <*> filterM doesFileExist c
 
 isSourceFile :: FilePath -> Bool
-isSourceFile p = and [takeFileName p /= "Setup.hs", isSuffixOf ".hs" p]
+isSourceFile p = (takeFileName p /= "Setup.hs") && (".hs" `isSuffixOf` p)
 
 getSources :: IO [FilePath]
 getSources = liftM (filter isSourceFile . concat) (mapM go sourceDirs)

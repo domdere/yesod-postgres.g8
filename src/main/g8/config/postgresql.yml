@@ -1,0 +1,24 @@
+Default: &defaults
+  user: $postgres_user$
+  password: $postgres_password$
+  host: $postgres_host$
+  port: $postgres_port$
+  database: $postgres_dev_db$
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  database: $postgres_test_db$
+  <<: *defaults
+
+Staging:
+  database: $postgres_staging_db$
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: $postgres_prod_db$
+  poolsize: 100
+  <<: *defaults
