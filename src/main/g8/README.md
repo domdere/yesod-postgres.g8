@@ -20,6 +20,11 @@ See `cabal build --help` for more build options.
 
 ## Yesod Development
 
+You first need to install the **Yesod Development Platform** like so (Preferably **before** you run `cabal install` on this project):
+
+    cabal install yesod-platform
+    cabal install yesod-bin
+
 To run the development server run
 
     \$ yesod devel
