@@ -15,6 +15,7 @@ data/
 
 # cabal build directory:
 dist/
-
+cabal-dev/
+*.buildinfo
 # the test out dir when testing the g8 templates locally
 target/

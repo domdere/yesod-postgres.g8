@@ -1,4 +1,4 @@
-exec: ../dist/build/$executable_name;format="camel"$/$executable_name;format="camel"$
+exec: ../dist/build/$executable_name$/$executable_name$
 args:
     - production
 host: <<HOST-NOT-SET>>
