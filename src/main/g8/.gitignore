@@ -14,4 +14,6 @@
 data/
 
 #cabal build directory:
+cabal-dev/
 dist/
+sandbox/
