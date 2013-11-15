@@ -6,4 +6,4 @@ A bit of a Roadmap to let you know what is where.
 
 -   [**Foundation.hs**] [foundation]: The application specification goes here
 
-[foundation]: docs/DevelopmentGuide/Foundation.md
+[foundation]: ./Foundation.md
