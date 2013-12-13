@@ -1,6 +1,6 @@
 {-# LANGUAGE PackageImports #-}
 
-import "$name;format="camel"$" Application (getApplicationDev)
+import "$name;format="norm"$" Application (getApplicationDev)
 import Network.Wai.Handler.Warp
     (runSettings, defaultSettings, settingsPort)
 import Control.Concurrent (forkIO, threadDelay)

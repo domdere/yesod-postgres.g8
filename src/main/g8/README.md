@@ -4,7 +4,7 @@ $cabal_description$
 
 ## Building the project
 
-The project must be "configured" at least once everytime `$name;format="camel"$.cabal` changes, this can be done with:
+The project must be "configured" at least once everytime `$name;format="norm"$.cabal` changes, this can be done with:
 
     cabal configure
 
@@ -29,7 +29,7 @@ To run the development server run
 
     \$ yesod devel
 
-From the same directory as the `$name;format="camel"$.cabal` file
+From the same directory as the `$name;format="norm"$.cabal` file
 
 See [**here**] [yesod-home] for more information on **Yesod**.
 
