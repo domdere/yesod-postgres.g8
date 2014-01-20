@@ -17,3 +17,7 @@ data/
 cabal-dev/
 dist/
 sandbox/
+
+#documentation artifacts
+public/
+internal/
