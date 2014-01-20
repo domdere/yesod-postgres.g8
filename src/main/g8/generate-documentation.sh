@@ -27,15 +27,16 @@ cabal-dev configure --disable-tests
 INTDOCDIR=`mktemp -d -t pages.XXXXXX`
 PUBDOCDIR=`mktemp -d -t pages.XXXXXX`
 
-cabal-dev haddock --internal --haddock-options=-o$INTDOCDIR
-cabal-dev haddock --haddock-options=-o$PUBDOCDIR
+cabal-dev haddock --hyperlink-source --haddock-options=-o$INTDOCDIR
+cabal-dev haddock --hyperlink-source --haddock-options=-o$PUBDOCDIR
 
 HEAD=`git rev-parse HEAD`
 
 git checkout gh-pages
 git rm -rf --ignore-unmatch .
 
-echo "cabal-dev/\nstatic/" > .gitignore
+echo "cabal-dev/" > .gitignore
+echo "static/" >> .gitignore
 
 mkdir internal
 mkdir public
