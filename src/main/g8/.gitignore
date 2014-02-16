@@ -13,10 +13,15 @@
 # potential build files:
 data/
 
-#cabal build directory:
+#cabal-dev build directory:
 cabal-dev/
+
+#cabal-sandbox build artifacts
+.cabal-sandbox/
+cabal.sandbox.config
+
+# project build directory
 dist/
-sandbox/
 
 #documentation artifacts
 public/
