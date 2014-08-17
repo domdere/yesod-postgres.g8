@@ -22,6 +22,10 @@ source-repository       head
 flag                    small_base
     description:        Choose the new, split-up base package.
 
+flag                    liquid-tests
+    description:        Include verification tests for the Liquid Type Annotations
+    default:            False
+
 flag                    dev
     description:        Turn on development settings, like auto-reload templates.
     default:            False
@@ -179,6 +183,35 @@ test-suite test
                     ,   monad-logger
                     ,   transformers
                     ,   hspec
+
+test-suite              liquid
+    if flag(liquid-tests)
+        buildable:      True
+    else
+        buildable:      False
+
+    type:
+                        exitcode-stdio-1.0
+
+    main-is:
+                        Main.hs
+
+    default-language:
+                        Haskell2010
+
+    build-depends:
+                        base            < 5 && >= 3
+                    ,   filepath        >= 1.3
+                    ,   process         == 1.2.*
+                    ,   directory       >= 1.1
+
+    ghc-options:
+                        -Wall
+                        -threaded
+
+    hs-source-dirs:
+                        liquid
+
 
 test-suite              hlint
     default-language:   Haskell2010

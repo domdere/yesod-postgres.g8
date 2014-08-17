@@ -45,6 +45,20 @@ See `cabal build --help` for more build options.
 
     cabal test
 
+### Liquid Haskell
+
+This project has a test-suite target that will verify any [**Liquid Haskell**] [liquid-haskell] type annotations.
+
+This target is disabled by default since **Liquid Haskell** and an SMT solver like `z3` can be a bit of a pain to install.
+
+Instructions for setting up **Liquid Haskell** can be found [**here**] [liquid-haskell-instructions].
+
+The test-suite target can be enable at the configure step with a line like:
+
+```
+cabal configure --enable-tests --flags="liquid-tests"
+```
+
 ## Adding Unit tests
 
 Unit tests are written with [**doctest**] [doctest-github], for instructions on how to add unit tests
