@@ -82,7 +82,7 @@ isSourceFile :: FilePath -> Bool
 isSourceFile p = (takeFileName p /= "Setup.hs") && (".hs" `isSuffixOf` p)
 
 getSources :: IO [FilePath]
-getSources = liftM (filter ((`notElem` srcExceptions) . isSourceFile) . concat) (mapM go sourceDirs)
+getSources = liftM (filter (`notElem` srcExceptions) . filter isSourceFile . concat) (mapM go sourceDirs)
     where
         go dir = do
             (dirs, files) <- getFilesAndDirectories dir
