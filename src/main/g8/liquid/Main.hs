@@ -3,6 +3,7 @@ module Main where
 
 import Prelude ( Eq(..), Bool, String, (\$), (.), (&&) )
 
+import Build_liquid ( deps, packageDBs )
 import Control.Applicative
 import Control.Monad
 import Data.List
@@ -11,8 +12,48 @@ import System.FilePath
 import System.IO ( IO, print )
 import System.Process ( readProcess )
 
-liquidOpts :: [FilePath]
-liquidOpts = ["--idirs=src"]
+extensions :: [String]
+extensions =
+    [   "TemplateHaskell"
+    ,   "QuasiQuotes"
+    ,   "OverloadedStrings"
+    ,   "NoImplicitPrelude"
+    ,   "CPP"
+    ,   "MultiParamTypeClasses"
+    ,   "TypeFamilies"
+    ,   "GADTs"
+    ,   "GeneralizedNewtypeDeriving"
+    ,   "FlexibleContexts"
+    ,   "EmptyDataDecls"
+    ,   "NoMonomorphismRestriction"
+    ,   "DeriveDataTypeable"
+    ]
+
+
+consintersperse :: a -> [a] -> [a]
+consintersperse _ [] = []
+consintersperse x xs = x : (intersperse x xs)
+
+packageDBOpts :: [String]
+packageDBOpts = (consintersperse "-g" . consintersperse "-package-db") packageDBs
+
+packageOpts :: [String]
+packageOpts = (consintersperse "-g" . consintersperse "-package") deps
+
+extensionOpts :: [String]
+extensionOpts = (consintersperse "-g" . fmap ("-X" ++)) extensions
+
+
+liquidOpts :: [String]
+liquidOpts = ["--idirs=src"] ++ packageDBOpts ++ packageOpts ++ extensionOpts
+
+-- | any Exceptions or source files you do not want to test.
+srcExceptions :: [FilePath]
+srcExceptions =
+    [   "src/Model.hs"
+    ,   "src/Handler/Home.hs"
+    ,   "src/Settings/StaticFiles.hs"
+    ]
 
 -- the list of all file paths to search for source files
 sourceDirs :: [FilePath]
@@ -41,7 +82,7 @@ isSourceFile :: FilePath -> Bool
 isSourceFile p = (takeFileName p /= "Setup.hs") && (".hs" `isSuffixOf` p)
 
 getSources :: IO [FilePath]
-getSources = liftM (filter isSourceFile . concat) (mapM go sourceDirs)
+getSources = liftM (filter ((`notElem` srcExceptions) . isSourceFile) . concat) (mapM go sourceDirs)
     where
         go dir = do
             (dirs, files) <- getFilesAndDirectories dir

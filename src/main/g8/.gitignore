@@ -23,6 +23,9 @@ cabal.sandbox.config
 # project build directory
 dist/
 
-#documentation artifacts
+# documentation artifacts
 public/
 internal/
+
+# liquid haskell artifacts
+.liquid/
